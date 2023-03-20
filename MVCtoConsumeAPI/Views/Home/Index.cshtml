@@ -1,0 +1,31 @@
+﻿@using System.Data
+@model DataTable
+
+@{
+    ViewData["Title"] = "Tasks List";
+}
+
+<div>
+    <a asp-action="AddTask">Add Task</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayName("Description")</th>
+            <th>@Html.DisplayName("Completed")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DataRow row in Model.Rows)
+        {
+            <tr>
+                <td>
+                    @row["Description"]
+                </td>
+                <td>
+                    @row["IsCompleted"]
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

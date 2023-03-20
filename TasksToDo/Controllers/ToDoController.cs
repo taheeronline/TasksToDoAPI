@@ -75,6 +75,7 @@ namespace TasksToDo.Controllers
 
         // POST: api/TodoItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [ActionName("AddTask")]
         [HttpPost]
         public async Task<ActionResult<ToDoItem>> PostTodoItem(ToDoItem todoItem)
         {

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<TaskEntity>
+
+@{
+    ViewData["Title"] = "Tasks List from Model Entity";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayName("Description")</th>
+            <th>@Html.DisplayName("Completed")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td>
+                    @row.Description
+                </td>
+                <td>
+                    @row.IsCompleted
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
