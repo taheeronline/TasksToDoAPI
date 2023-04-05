@@ -13,6 +13,7 @@
         <tr>
             <th>@Html.DisplayName("Description")</th>
             <th>@Html.DisplayName("Completed")</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,9 @@
                 </td>
                 <td>
                     @row["IsCompleted"]
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>
                 </td>
             </tr>
         }

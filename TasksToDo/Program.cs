@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
-                    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
+                    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]), 
+                    ServiceLifetime.Singleton);
 
 builder.Services.AddScoped<iToDoService, ToDoService>();
 

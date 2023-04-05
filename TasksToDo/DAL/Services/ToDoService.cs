@@ -57,14 +57,23 @@ namespace TasksToDo.DAL.Services
             return false;
         }
 
-        public async void DeleteTask(int TaskId)
+        public async Task DeleteTask(int TaskId)
         {
-            var result = await _context.ToDoItems
-                .FirstOrDefaultAsync(e => e.Id == TaskId);
-            if (result != null)
+            try
             {
-                _context.ToDoItems.Remove(result);
-                await _context.SaveChangesAsync();
+
+                var result = await _context.ToDoItems
+                    .FirstOrDefaultAsync(e => e.Id == TaskId);
+                if (result != null)
+                {
+                    _context.ToDoItems.Remove(result);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TasksToDo", "TasksToDo\TasksToDo.csproj", "{F1699562-CD60-451B-ACB2-77D74365A45F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCtoConsumeAPI", "MVCtoConsumeAPI\MVCtoConsumeAPI.csproj", "{B1CFB27A-2BEC-4E83-9C63-83526A73546D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCtoConsumeAPI", "MVCtoConsumeAPI\MVCtoConsumeAPI.csproj", "{B1CFB27A-2BEC-4E83-9C63-83526A73546D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -8,7 +8,7 @@ namespace TasksToDo.DAL.iServices
         Task<ToDoItem> GetTaskByID(int TaskId);
         Task<ToDoItem> AddTask(ToDoItem TaskItem);
         Task<bool> UpdateTask(ToDoItem TaskItem);
-        void DeleteTask(int TaskId);
+        Task DeleteTask(int TaskId);
         bool ItemExists(int id);
     }
 }
