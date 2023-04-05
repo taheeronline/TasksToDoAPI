@@ -42,29 +42,6 @@ namespace MVCtoConsumeAPI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Index2()
-        {
-            //calling WEBP API Get action to populate view
-
-            IList<TaskEntity> tasks = new List<TaskEntity>();
-
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage getData = await _httpClient.GetAsync("ToDo");
-            if (getData.IsSuccessStatusCode)
-            {
-                string results = getData.Content.ReadAsStringAsync().Result;
-                tasks = JsonConvert.DeserializeObject<IList<TaskEntity>>(results);
-            }
-            else
-            {
-                Console.WriteLine("Error calling WEB API");
-            }
-            ViewData.Model = tasks;
-            return View();
-        }
-
-
         public async Task<ActionResult<string>> AddTask(TaskEntity task)
         {
             TaskEntity obj = new TaskEntity()
@@ -135,6 +112,46 @@ namespace MVCtoConsumeAPI.Controllers
             }
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            //calling WEBP API Get action to populate view
+
+            TaskEntity task = new TaskEntity();
+
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage getData = await _httpClient.GetAsync($"ToDo/{id}");
+            if (getData.IsSuccessStatusCode)
+            {
+                string results = getData.Content.ReadAsStringAsync().Result;
+                task = JsonConvert.DeserializeObject<TaskEntity>(results);
+            }
+            else
+            {
+                Console.WriteLine("Error calling WEB API");
+            }
+            ViewData.Model = task;
+
+            return View(task);
+        }
+
+        // POST: ToDoItems/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(TaskEntity task)
+        {
+                //HTTP POST
+                var putTask = await _httpClient.PutAsJsonAsync<TaskEntity>("ToDo", task);
+
+                if (putTask.IsSuccessStatusCode)
+                {
+
+                    return RedirectToAction("Index");
+                }
+            return View(putTask);
+        }
 
         public IActionResult Privacy()
         {

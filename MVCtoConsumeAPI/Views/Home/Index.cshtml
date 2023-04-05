@@ -27,7 +27,8 @@
                     @row["IsCompleted"]
                 </td>
                 <td>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>
+                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@row["id"]">Edit</a>
                 </td>
             </tr>
         }
