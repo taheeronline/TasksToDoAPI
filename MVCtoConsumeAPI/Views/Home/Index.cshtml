@@ -12,7 +12,26 @@
 <div>
     <a class="btn btn-primary" asp-action="AddTask">Add Task</a>
 </div>
-<table class="table">
+<hr />
+<div class="row col-12" style="margin-bottom: 20px;">
+    @foreach (DataRow row in Model.Rows)
+    {
+        <div class="card @((bool)row["isCompleted"] ? "bg-success border-danger" : "bg-inf border-danger")" style="width:400px; margin-bottom: 20px;margin-left:20px;">
+            <div class="card-header">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" checked="@row["IsCompleted"]" readonly/>
+                </div>
+                <span class="header-value">@row["CreatedDate"]</span>
+            </div>
+            <div class="card-body">@row["Description"]</div>
+            <div class="card-footer">
+                <a class="btn btn-danger" style="width:80px" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>
+                <a class="btn btn-info" style="width:80px"  asp-action="Edit" asp-route-id="@row["id"]">Edit</a>
+            </div>
+        </div>
+    }
+</div>
+@*<table class="table">
     <thead>
         <tr>
             <th>@Html.DisplayName("Description")</th>
@@ -37,4 +56,4 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
