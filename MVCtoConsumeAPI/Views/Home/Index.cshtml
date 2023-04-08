@@ -4,7 +4,11 @@
 @{
     ViewData["Title"] = "Tasks List";
 }
-
+<style>
+    input[type="checkbox"][readonly] {
+        pointer-events: none;
+    }
+</style>
 <div>
     <a class="btn btn-primary" asp-action="AddTask">Add Task</a>
 </div>
@@ -24,7 +28,7 @@
                     @row["Description"]
                 </td>
                 <td>
-                    @row["IsCompleted"]
+                    <input type="checkbox" checked=@row["IsCompleted"] readonly/>
                 </td>
                 <td>
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>

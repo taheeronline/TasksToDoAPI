@@ -94,7 +94,7 @@ namespace TasksToDo.Controllers
                 return NotFound();
             }
 
-            _toDoRepo.DeleteTask(id);
+            await _toDoRepo.DeleteTask(id);
 
             return NoContent();
         }
