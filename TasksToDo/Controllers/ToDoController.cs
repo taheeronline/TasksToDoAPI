@@ -46,12 +46,12 @@ namespace TasksToDo.Controllers
 
         // PUT: api/TodoItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(int id, ToDoItem todoItem)
+        [HttpPut()]
+        public async Task<IActionResult> PutTodoItem(ToDoItem todoItem)
         {
-            if (id != todoItem.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("Not a valid data");
             }
 
             try
@@ -60,7 +60,7 @@ namespace TasksToDo.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_toDoRepo.ItemExists(id))
+                if (!_toDoRepo.ItemExists(todoItem.Id))
                 {
                     return NotFound();
                 }
