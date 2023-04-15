@@ -4,19 +4,18 @@
     ViewData["Title"] = "Add Task";
 }
 
-<h1>Add Task</h1>
+<h1>Add New Task</h1>
 
-<h4>Task Entity</h4>
-<hr/>
+<hr class="bg-info" style="height:5px"/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddTask">
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control"/>
+                <label asp-for="Description" class="control-label text-danger fw-bold"></label>
+                <input asp-for="Description" class="form-control" required/>
             </div>
-            <div class="form-group">
-                <label asp-for="IsCompleted" class="control-label"></label>
+            <div class="form-group" style="padding:20px 20px 20px 0px;">
+                <label asp-for="IsCompleted" class="control-label fw-bold"></label>
                 @Html.CheckBoxFor(m => m.IsCompleted)
             </div>
             <div class="form-group" padding="20">
@@ -25,6 +24,6 @@
         </form>
     </div>
 </div>
-<div padding="20">
+<div style="padding:20px 20px 20px 0px;">
     <a asp-action="Index">Back to Task List</a>
 </div>

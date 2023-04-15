@@ -44,7 +44,7 @@ namespace MVCtoConsumeAPI.Controllers
 
         public async Task<ActionResult<string>> AddTask(TaskEntity task)
         {
-            TaskEntity obj = new TaskEntity()
+            TaskEntity _task = new TaskEntity()
             {
                 Description = task.Description,
                 IsCompleted = task.IsCompleted
@@ -54,7 +54,7 @@ namespace MVCtoConsumeAPI.Controllers
             {
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage getData = await _httpClient.PostAsJsonAsync<TaskEntity>("ToDo", obj);
+                HttpResponseMessage getData = await _httpClient.PostAsJsonAsync<TaskEntity>("ToDo", _task);
                 if (getData.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index", "Home");
@@ -142,15 +142,23 @@ namespace MVCtoConsumeAPI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(TaskEntity task)
         {
-                //HTTP POST
-                var putTask = await _httpClient.PutAsJsonAsync<TaskEntity>("ToDo", task);
+            //HTTP POST
+            if (task.IsCompleted == false)
+            {
+                task.CompletedDate = DateTime.Now;
+            }
+            else
+            {
+                task.CompletedDate = task.CreatedDate;
+            }
+            var _task = await _httpClient.PutAsJsonAsync<TaskEntity>("ToDo", task);
 
-                if (putTask.IsSuccessStatusCode)
-                {
+            if (_task.IsSuccessStatusCode)
+            {
 
-                    return RedirectToAction("Index");
-                }
-            return View(putTask);
+                return RedirectToAction("Index");
+            }
+            return View(_task);
         }
 
         public IActionResult Privacy()

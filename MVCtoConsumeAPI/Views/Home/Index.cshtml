@@ -19,14 +19,18 @@
         <div class="card @((bool)row["isCompleted"] ? "bg-success border-danger" : "bg-inf border-danger")" style="width:400px; margin-bottom: 20px;margin-left:20px;">
             <div class="card-header">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" checked="@row["IsCompleted"]" readonly/>
+                    <input class="form-check-input" type="checkbox" checked="@row["IsCompleted"]" readonly />
                 </div>
-                <span class="header-value">@row["CreatedDate"]</span>
+                <span class="header-value @((bool)row["isCompleted"] ? "text-white" : "")">Created Date: &nbsp;@(((DateTime)row["CreatedDate"]).ToLocalTime().ToShortDateString())</span>
             </div>
-            <div class="card-body">@row["Description"]</div>
+            <div class="card-body @((bool)row["isCompleted"] ? "text-white" : "")">
+                @row["Description"]<br />
+                Completion Comment:&nbsp;@row["CompletionComment"]
+                <br /><br /><span>Completion Date:&nbsp;@(((DateTime)row["CompletedDate"]).ToLocalTime().ToShortDateString())</span>
+            </div>
             <div class="card-footer">
                 <a class="btn btn-danger" style="width:80px" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>
-                <a class="btn btn-info" style="width:80px"  asp-action="Edit" asp-route-id="@row["id"]">Edit</a>
+                <a class="btn btn-info" style="width:80px" asp-action="Edit" asp-route-id="@row["id"]">Edit</a>
             </div>
         </div>
     }

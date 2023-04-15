@@ -14,5 +14,23 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: -webkit-linear-gradient(top, Orange, Purple);
+    background: -moz-linear-gradient(top, Orange, Purple);
+    background: -o-linear-gradient(top, Orange, Purple);
+    background: linear-gradient(to bottom, Orange, Purple);
+}
+
+footer {
+    background: -webkit-linear-gradient(top, Orange, Yellow);
+    background: -moz-linear-gradient(top, Orange, Yellow);
+    background: -o-linear-gradient(top, Orange, Yellow);
+    background: linear-gradient(to bottom, Orange, Yellow);
+}
+
+nav {
+    background: -webkit-linear-gradient(top, Orange, Yellow);
+    background: -moz-linear-gradient(top, Orange, Yellow);
+    background: -o-linear-gradient(top, Orange, Yellow);
+    background: linear-gradient(to bottom, Orange, Yellow);
 }

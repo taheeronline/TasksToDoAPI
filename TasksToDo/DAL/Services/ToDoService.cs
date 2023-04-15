@@ -48,6 +48,8 @@ namespace TasksToDo.DAL.Services
             {
                 result.Description = TaskItem.Description;
                 result.IsCompleted = TaskItem.IsCompleted;
+                result.CompletedDate= TaskItem.CompletedDate;
+                result.CompletionComment = TaskItem.CompletionComment;  
 
                 await _context.SaveChangesAsync();
 
