@@ -6,7 +6,7 @@
 
 <h1>Edit this task</h1>
 
-<hr class="bg-info" style="height:5px" />
+<hr class="bg-dark" style="height:5px" />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -17,7 +17,7 @@
                 <span asp-validation-for="Id" class="text-danger" hidden></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label text-danger fw-bold"></label>
+                <label asp-for="Description" class="control-label fw-bold"></label>
                 <input asp-for="Description" class="form-control" required />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
@@ -32,7 +32,7 @@
                 <span asp-validation-for="CompletionComment" class="text-danger"></span>
             </div>
             <div class="form-group" style="padding:20px 20px 20px 0px;">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" style="width:80px" />
             </div>
         </form>
     </div>

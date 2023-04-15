@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this task?</h3>
 <div>
-    <hr class="bg-info" style="height:5px" />
+    <hr class="bg-dark" style="height:5px" />
     <dl class="row">
         <dt class = "col-sm-2" hidden>
             @Html.DisplayNameFor(model => model.Id) 
@@ -19,7 +19,7 @@
         <dt class = "col-sm-2 fw-bold">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10 fw-bold text-danger">
+        <dd class = "col-sm-10 fw-bold text-white">
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
@@ -31,7 +31,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" />&nbsp;&nbsp; | &nbsp;&nbsp;
+        <input type="submit" value="Delete" class="btn btn-danger" style="width:80px" />&nbsp;&nbsp; | &nbsp;&nbsp;
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
