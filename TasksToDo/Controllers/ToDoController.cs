@@ -18,7 +18,6 @@ namespace TasksToDo.Controllers
 
         public ToDoController(iToDoService toDoRepo)
         {
-
             _toDoRepo = toDoRepo;
         }
 
@@ -27,7 +26,6 @@ namespace TasksToDo.Controllers
         public async Task<IEnumerable<ToDoItem>> GetTodoItems()
         {
             return await _toDoRepo.GetAllTasks();
-
         }
 
         // GET: api/TodoItems/5
