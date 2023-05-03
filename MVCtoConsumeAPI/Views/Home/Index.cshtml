@@ -12,52 +12,31 @@
 <div>
     <a class="btn btn-primary" asp-action="AddTask" style="width:150px; height:40px;"><b>Add Task</b></a>
 </div>
-<hr />
-<div class="row" style="margin-bottom: 20px;">
+<hr class="bg-white" style="height:5px" />
+<div class="row">
     @foreach (DataRow row in Model.Rows)
     {
-        <div class="card @((bool)row["isCompleted"] ? "bg-success border-danger" : "bg-inf border-danger")" style="width:400px; margin-bottom: 20px;margin-left:20px;">
-            <div class="card-header">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" checked="@row["IsCompleted"]" readonly />
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-5">
+            <div class="card h-100 @((bool)row["isCompleted"] ? "bg-gradient-light border-danger" : "bg-gradient-light border-dark")">
+                <div class="card-header">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" checked="@row["IsCompleted"]" readonly />
+                    </div>
+                    <span class="header-value text-white"><b>Created Date&nbsp;:</b>&nbsp;@(((DateTime)row["CreatedDate"]).ToLocalTime().ToShortDateString())</span>
                 </div>
-                <span class="header-value @((bool)row["isCompleted"] ? "text-white" : "")"><b>Created Date:</b>&nbsp;@(((DateTime)row["CreatedDate"]).ToLocalTime().ToShortDateString())</span>
-            </div>
-            <div class="card-body @((bool)row["isCompleted"] ? "text-white fw-bold" : "")">
-                @row["Description"]<br /><hr class="bg-dark"/>
-                Completion Comment:&nbsp;@row["CompletionComment"]
-                <br /><br /><span><b>Completion Date:</b>&nbsp;@(((DateTime)row["CompletedDate"]).ToLocalTime().ToShortDateString())</span>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-danger" style="width:80px" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>
-                <a class="btn btn-info" style="width:80px" asp-action="Edit" asp-route-id="@row["id"]">Edit</a>
+                <div class="card-body text-white">
+                    @row["Description"]
+                    <br />
+                    <hr class="bg-light" />
+                    <b>Completion Comment&nbsp;:</b>&nbsp;<i>@row["CompletionComment"]</i>
+                    <br /><hr class="bg-light" /><span><b>Completion Date&nbsp;:</b>&nbsp;@(((DateTime)row["CompletedDate"]).ToLocalTime().ToShortDateString())</span>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-danger" style="width:80px" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>
+                    <a class="btn btn-info" style="width:80px" asp-action="Edit" asp-route-id="@row["id"]">Edit</a>
+                </div>
+
             </div>
         </div>
     }
 </div>
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayName("Description")</th>
-            <th>@Html.DisplayName("Completed")</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (DataRow row in Model.Rows)
-        {
-            <tr>
-                <td>
-                    @row["Description"]
-                </td>
-                <td>
-                    <input type="checkbox" checked=@row["IsCompleted"] readonly/>
-                </td>
-                <td>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>
-                    <a class="btn btn-info" asp-action="Edit" asp-route-id="@row["id"]">Edit</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>*@

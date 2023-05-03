@@ -15,22 +15,28 @@ html {
 
 body {
     margin-bottom: 60px;
-    background: -webkit-linear-gradient(top, Orange, Purple);
-    background: -moz-linear-gradient(top, Orange, Purple);
-    background: -o-linear-gradient(top, Orange, Purple);
-    background: linear-gradient(to bottom, Orange, Purple);
+    background: linear-gradient(to bottom, #192403, #00ffffc6);
 }
 
 footer {
-    background: -webkit-linear-gradient(top, Orange, Yellow);
-    background: -moz-linear-gradient(top, Orange, Yellow);
-    background: -o-linear-gradient(top, Orange, Yellow);
-    background: linear-gradient(to bottom, Orange, Yellow);
+    background: linear-gradient(to bottom, #00ffffc6, #192403);
 }
 
 nav {
-    background: -webkit-linear-gradient(top, Orange, Yellow);
-    background: -moz-linear-gradient(top, Orange, Yellow);
-    background: -o-linear-gradient(top, Orange, Yellow);
-    background: linear-gradient(to bottom, Orange, Yellow);
+    background: linear-gradient(to bottom, #00ffffc6, #192403);
+}
+
+.bg-gradient-light {
+    background-image: linear-gradient(to bottom right, #49a8ed, #240303);
+}
+input[type="checkbox"]:checked {
+    background-color: green;
+}
+
+.card{
+    transition: all 0.3s;
+}
+
+.card:hover{
+    transform: scale(1.15);
 }
