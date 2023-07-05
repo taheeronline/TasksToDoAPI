@@ -37,6 +37,8 @@ input[type="checkbox"]:checked {
     transition: all 0.3s;
 }
 
-.card:hover{
-    transform: scale(1.15);
-}
+    .card:hover {
+        transform: scale(1.15);
+        border: 3px solid #d0d0d0;
+        margin: -2px;
+    }
