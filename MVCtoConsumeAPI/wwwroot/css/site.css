@@ -15,19 +15,19 @@ html {
 
 body {
     margin-bottom: 60px;
-    background: linear-gradient(to bottom, #192403, #00ffffc6);
+    background: linear-gradient(to bottom, gray, white);
 }
 
 footer {
-    background: linear-gradient(to bottom, #00ffffc6, #192403);
+    background: linear-gradient(to bottom right, gray, white);
 }
 
 nav {
-    background: linear-gradient(to bottom, #00ffffc6, #192403);
+    background: linear-gradient(to bottom right, gray, white);
 }
 
 .bg-gradient-light {
-    background-image: linear-gradient(to bottom right, #49a8ed, #240303);
+    background-image: linear-gradient(to bottom right, gray, black);
 }
 input[type="checkbox"]:checked {
     background-color: green;
