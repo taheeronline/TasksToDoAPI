@@ -29,7 +29,7 @@
                     <br />
                     <hr class="bg-light" />
                     <span><b>Completion Comment&nbsp;:</b>&nbsp;<i>@row["CompletionComment"]</i></span>
-                    <br /><hr class="bg-light" /><span><b>Completion Date&nbsp;:</b>&nbsp;@(((DateTime)row["CompletedDate"]).ToLocalTime().ToShortDateString())</span>
+                    <br /><hr class="bg-light" /><span><b>Completion Date&nbsp;:</b>&nbsp;@(((DateTime)row["CompletedDate"]).ToLocalTime().ToShortDateString() == "01-Jan-0001" ? "N/A" : ((DateTime)row["CompletedDate"]).ToLocalTime().ToShortDateString())</span>
                 </div>
                 <div class="card-footer">
                     <a class="btn btn-danger" style="width:80px" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>

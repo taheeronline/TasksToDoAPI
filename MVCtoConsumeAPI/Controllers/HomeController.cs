@@ -143,14 +143,11 @@ namespace MVCtoConsumeAPI.Controllers
         public async Task<IActionResult> Edit(TaskEntity task)
         {
             //HTTP POST
-            if (task.IsCompleted == false)
+            if (task.IsCompleted == true)
             {
                 task.CompletedDate = DateTime.Now;
             }
-            else
-            {
-                task.CompletedDate = task.CreatedDate;
-            }
+
             var _task = await _httpClient.PutAsJsonAsync<TaskEntity>("ToDo", task);
 
             if (_task.IsSuccessStatusCode)
