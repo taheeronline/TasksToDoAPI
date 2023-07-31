@@ -10,6 +10,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
                     options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]), 
                     ServiceLifetime.Singleton);
 
+builder.Services.AddScoped<UserService>();
+
 builder.Services.AddScoped<iToDoService, ToDoService>();
 
 builder.Services.AddControllers();

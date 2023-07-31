@@ -9,6 +9,7 @@ namespace TasksToDo.DAL
         {
         }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<ToDoItem> ToDoItems { get; set; }
         public DbSet<EmailEntity> EmailsSent { get; set; }
     }
