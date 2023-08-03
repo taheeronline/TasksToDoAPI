@@ -1,5 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using TasksToDo.DAL.iServices;
 using TasksToDo.DAL.Services;
 using TasksToDo.Models;
 
@@ -9,11 +15,14 @@ namespace TasksToDo.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly iUserService _userService;
 
-        public UserController(UserService userService)
+        private readonly IConfiguration _configuration;
+
+        public UserController(iUserService userService, IConfiguration configuration)
         {
             _userService = userService;
+            _configuration = configuration;
         }
 
         [HttpPost("Register")]
@@ -29,8 +38,8 @@ namespace TasksToDo.Controllers
             // Create a new user entity
             var newUser = new User
             {
-                Name= model.Name,
-                Surname= model.Surname,
+                Name = model.Name,
+                Surname = model.Surname,
                 Email = model.Email,
                 PasswordHash = HashPassword(model.PasswordHash) // Hash the password before storing it
             };
@@ -44,36 +53,60 @@ namespace TasksToDo.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            var user = await _userService.GetUserByEmailAsync(model.Email);
 
-            if (user != null && VerifyPassword(user.PasswordHash, model.Password))
+            try
             {
-                // User authenticated successfully, generate and return a JWT token
+                var user = await _userService.GetUserByEmailAsync(model.Email);
 
-                // Implement JWT token generation and return the token here
-                // For simplicity, this example does not include the JWT token generation logic.
+                if (user != null && VerifyPassword(user.PasswordHash, model.Password))
+                {
+                    // User authenticated successfully, generate and return a JWT token
 
-                return Ok(new { token = "Your_JWT_Token" });
+                    // User authenticated successfully, generate and return the JWT token
+
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var jwtSettings = _configuration.GetSection("JwtSettings");
+                    var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = new ClaimsIdentity(new Claim[]
+                        {
+                            new Claim(ClaimTypes.Name, user.Email),
+                            // Add other claims if needed, e.g., user roles or additional information
+                        }),
+                        Expires = DateTime.UtcNow.AddHours(1), // Set token expiration
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                    };
+
+                    var token = tokenHandler.CreateToken(tokenDescriptor);
+                    var tokenString = tokenHandler.WriteToken(token);
+
+                    // Return the token as part of the response
+                    return Ok(new { token = tokenString });
+                }
+
+                return Unauthorized(new { message = "Invalid email or password." });
+
             }
-
-            return Unauthorized(new { message = "Invalid email or password." });
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // Helper method to verify the password
         private bool VerifyPassword(string hashedPassword, string password)
         {
-            // Implement your password verification logic here, e.g., compare hashedPassword with the provided password
-            // For simplicity, this example assumes the password is not hashed and compares it directly.
-            return hashedPassword == password;
+            // Compare the provided password with the hashed password using BCrypt
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
         }
 
 
         // Helper method to hash the password
         private string HashPassword(string password)
         {
-            // Implement your password hashing logic here, e.g., using BCrypt or PBKDF2
-            // For simplicity, this example does not include actual hashing logic.
-            return password;
+            // Generate a secure salt and hash the password using BCrypt
+            return BCrypt.Net.BCrypt.HashPassword(password, BCrypt.Net.BCrypt.GenerateSalt());
         }
     }
 }
