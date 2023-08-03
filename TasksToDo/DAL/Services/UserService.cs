@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TasksToDo.DAL.iServices;
 using TasksToDo.Models;
 
 namespace TasksToDo.DAL.Services
 {
-    public class UserService
+    public class UserService:iUserService
     {
         private readonly ApplicationDBContext _context;
 
@@ -14,8 +15,7 @@ namespace TasksToDo.DAL.Services
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            return await _context.Set<User>()
-                                 .SingleOrDefaultAsync(u => u.Email == email);
+            return await _context.Set<User>().SingleOrDefaultAsync(u => u.Email == email);
         }
 
         public async Task AddUserAsync(User user)
