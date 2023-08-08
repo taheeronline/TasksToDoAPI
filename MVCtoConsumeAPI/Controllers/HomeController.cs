@@ -33,6 +33,19 @@ namespace MVCtoConsumeAPI.Controllers
             {
                 string results = getData.Content.ReadAsStringAsync().Result;
                 dt = JsonConvert.DeserializeObject<DataTable>(results);
+                //HttpContext.Session.SetString("UserName", "Guest");
+
+                var viewModel = new LayoutViewModel();
+
+                if (ViewData["UserName"]?.ToString() != null && ViewData["UserName"]?.ToString() != string.Empty)
+
+                {
+                    ViewData["UserName"] = "Guest";
+                }
+                else
+                {
+                    ViewData["UserName"] = HttpContext.Session.GetString("UserName") ?? string.Empty;
+                }
             }
             else
             {

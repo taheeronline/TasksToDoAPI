@@ -1,0 +1,32 @@
+﻿@model LoginModel
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    <section>
+        <div class="row d-flex justify-content-center col-12">
+            <div class="col-4 border border-primary rounded m-20">
+                <form id="account" method="post" class="py-5">
+                    <div class="d-flex justify-content-center">
+                        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group ">
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group p-1 ">
+                        <button type="submit" class="btn btn-lg btn-success btn-block">Log In</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+}

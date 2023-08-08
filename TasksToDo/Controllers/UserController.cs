@@ -53,7 +53,6 @@ namespace TasksToDo.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-
             try
             {
                 var user = await _userService.GetUserByEmailAsync(model.Email);
@@ -88,10 +87,18 @@ namespace TasksToDo.Controllers
                 return Unauthorized(new { message = "Invalid email or password." });
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
+        }
+
+        [HttpPost("Logout")]
+        public IActionResult Logout()
+        {
+            // Invalidate the token or session on the client side
+            // For example, remove the token from the client's storage
+            return Ok(new { message = "Logout successful." });
         }
 
         // Helper method to verify the password
