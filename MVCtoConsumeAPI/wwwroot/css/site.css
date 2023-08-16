@@ -1,16 +1,16 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -29,11 +29,12 @@ nav {
 .bg-gradient-light {
     background-image: linear-gradient(to bottom right, gray, black);
 }
+
 input[type="checkbox"]:checked {
     background-color: green;
 }
 
-.card{
+.card {
     transition: all 0.3s;
 }
 
@@ -42,3 +43,7 @@ input[type="checkbox"]:checked {
         border: 3px solid #d0d0d0;
         /*margin: -2px;*/
     }
+
+input[type="checkbox"][readonly] {
+    pointer-events: none;
+}
