@@ -17,14 +17,14 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" checked="@row["IsCompleted"]" readonly />
                     </div>
-                    <span class="header-value text-white"><b>Created Date&nbsp;:</b>&nbsp;@(((DateTime)row["CreatedDate"]).ToLocalTime().ToShortDateString())</span>
+                    <span class="header-value text-white"><b>Created Date&nbsp;:</b>&nbsp;@(((DateTime)row["CreatedDate"]).ToShortDateString())</span>
                 </div>
                 <div class="card-body text-white">
                     <span>@row["Description"]</span>
                     <br />
                     <hr class="bg-light" />
                     <span><b>Completion Comment&nbsp;:</b>&nbsp;<i>@row["CompletionComment"]</i></span>
-                    <br /><hr class="bg-light" /><span><b>Completion Date&nbsp;:</b>&nbsp;@(((DateTime)row["CompletedDate"]).ToLocalTime().ToShortDateString() == "01-Jan-0001" ? "N/A" : ((DateTime)row["CompletedDate"]).ToLocalTime().ToShortDateString())</span>
+                    <br /><hr class="bg-light" /><span><b>Completion Date&nbsp;:</b>&nbsp;@(((DateTime)row["CompletedDate"]).ToShortDateString() == "01-Jan-0001" ? "N/A" : ((DateTime)row["CompletedDate"]).ToLocalTime().ToShortDateString())</span>
                 </div>
                 <div class="card-footer">
                     <a class="btn btn-danger" style="width:80px" asp-action="Delete" asp-route-id="@row["id"]">Delete</a>
